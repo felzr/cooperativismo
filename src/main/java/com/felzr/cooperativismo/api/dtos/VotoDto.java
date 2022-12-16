@@ -2,13 +2,13 @@ package com.felzr.cooperativismo.api.dtos;
 
 public class VotoDto {
     private String voto;
-    private PautaDto pauta;
-    private AssociadoDto associado;
+    private String idPauta;
+    private String cpfAssociado;
 
-    public VotoDto(String voto, PautaDto pauta, AssociadoDto associado) {
+    public VotoDto(String voto, String idPauta, String cpfAssociado) {
         this.voto = voto;
-        this.pauta = pauta;
-        this.associado = associado;
+        this.idPauta = idPauta;
+        this.cpfAssociado = cpfAssociado;
     }
 
     public String getVoto() {
@@ -19,19 +19,20 @@ public class VotoDto {
         this.voto = voto;
     }
 
-    public PautaDto getPauta() {
-        return pauta;
+    public String getIdPauta() {
+        return idPauta;
     }
 
-    public void setPauta(PautaDto pauta) {
-        this.pauta = pauta;
+    public void setIdPauta(String idPauta) {
+        idPauta = idPauta;
     }
 
-    public AssociadoDto getAssociado() {
-        return associado;
+    public String getCpfAssociado() {
+        return cpfAssociado;
     }
 
-    public void setAssociado(AssociadoDto associado) {
-        this.associado = associado;
+    public void setCpfAssociado(String cpfAssociado) {
+        this.cpfAssociado = cpfAssociado;
     }
+
 }

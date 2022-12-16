@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Document(collection = "pautas")
@@ -15,8 +14,6 @@ public class Pauta {
     private String tema;
     @Field("descricao")
     private String descricao;
-    @Field("dataCriacaoPauta")
-    private Date dataCriacaoPauta;
     @Field("dataFimVotacaoPauta")
     private Date dataFimVotacaoPauta;
     @Field("status")
@@ -46,14 +43,6 @@ public class Pauta {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public Date getDataCriacaoPauta() {
-        return dataCriacaoPauta;
-    }
-
-    public void setDataCriacaoPauta(Date dataCriacaoPauta) {
-        this.dataCriacaoPauta = dataCriacaoPauta;
     }
 
     public Date getDataFimVotacaoPauta() {

@@ -6,10 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
+
 @Document(collection = "votacao")
 public class Votacao {
-    @Id
-    private String id;
     @Field("votosSim")
     private Integer votosSim;
     @Field("votosNao")
@@ -17,12 +16,10 @@ public class Votacao {
     @Field("associadosQueVotaram")
     private List<Associado> associadosQueVotaram;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public Votacao(Integer votosSim, Integer votosNao, List<Associado> associadosQueVotaram) {
+        this.votosSim = votosSim;
+        this.votosNao = votosNao;
+        this.associadosQueVotaram = associadosQueVotaram;
     }
 
     public Integer getVotosSim() {

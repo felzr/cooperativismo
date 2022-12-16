@@ -6,7 +6,6 @@ public class PautaDto {
     private String id;
     private String tema;
     private String descricao;
-    private LocalDateTime dataCriacaoPauta;
     private LocalDateTime dataFimVotacaoPauta;
     private String status;
     private VotacaoDto votacao;
@@ -33,14 +32,6 @@ public class PautaDto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public LocalDateTime getDataCriacaoPauta() {
-        return dataCriacaoPauta;
-    }
-
-    public void setDataCriacaoPauta(LocalDateTime dataCriacaoPauta) {
-        this.dataCriacaoPauta = dataCriacaoPauta;
     }
 
     public LocalDateTime getDataFimVotacaoPauta() {

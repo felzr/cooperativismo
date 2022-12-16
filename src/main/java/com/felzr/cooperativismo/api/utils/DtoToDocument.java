@@ -8,7 +8,6 @@ import com.felzr.cooperativismo.api.pauta.model.Pauta;
 import com.felzr.cooperativismo.api.pauta.model.Votacao;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,6 @@ import java.util.stream.Collectors;
 public class DtoToDocument {
     public Pauta converterNovaPautaDtoParaDocumento(PautaDto dto) {
         Pauta pauta = new Pauta();
-        pauta.setDataCriacaoPauta(new Date());
         pauta.setDescricao(dto.getDescricao());
         pauta.setStatus(PautaEnum.FECHADA.getStatus());
         pauta.setTema(dto.getTema());
@@ -26,7 +24,6 @@ public class DtoToDocument {
     public Pauta converterPautaDtoParaDocumento(PautaDto dto) {
         Pauta pauta = new Pauta();
         pauta.setId(dto.getId());
-        pauta.setDataCriacaoPauta(DateUtils.convertToDateDefault(dto.getDataCriacaoPauta()));
         pauta.setDescricao(dto.getDescricao());
         pauta.setStatus(PautaEnum.FECHADA.getStatus());
         pauta.setTema(dto.getTema());
@@ -35,11 +32,10 @@ public class DtoToDocument {
     }
 
     Votacao converterVotacaoDtoParaDocumento(VotacaoDto votacaoDto) {
-        Votacao votacao = new Votacao();
+        List<Associado> associados = votacaoDto.getAssociadosQueVotaram().stream().map(associadoDto -> new Associado(associadoDto.getId(), associadoDto.getCpf(), associadoDto.getNome())).collect(Collectors.toList());
+        Votacao votacao = new Votacao(votacaoDto.getVotosSim(), votacaoDto.getVotosNao(), null);
         votacao.setVotosNao(votacaoDto.getVotosNao());
         votacao.setVotosSim(votacaoDto.getVotosSim());
-        votacao.setId(votacao.getId());
-        List<Associado> associados = votacaoDto.getAssociadosQueVotaram().stream().map(associadoDto -> new Associado(associadoDto.getId(), associadoDto.getCpf(), associadoDto.getNome())).collect(Collectors.toList());
         votacao.setAssociadosQueVotaram(associados);
         return votacao;
     }
@@ -49,17 +45,16 @@ public class DtoToDocument {
         dto.setId(pauta.getId());
         dto.setTema(pauta.getTema());
         dto.setDescricao(pauta.getDescricao());
-        dto.setDataCriacaoPauta(DateUtils.getLocalDateTime(pauta.getDataCriacaoPauta()));
         if (pauta.getDataFimVotacaoPauta() != null) {
             dto.setDataFimVotacaoPauta(DateUtils.getLocalDateTime(pauta.getDataFimVotacaoPauta()));
         }
         dto.setStatus(pauta.getStatus());
         return dto;
     }
+
     public Pauta abrirParaVotacao(PautaDto dto) {
         Pauta pauta = new Pauta();
         pauta.setId(dto.getId());
-        pauta.setDataCriacaoPauta(DateUtils.convertToDateDefault(dto.getDataCriacaoPauta()));
         pauta.setDescricao(dto.getDescricao());
         pauta.setStatus(PautaEnum.FECHADA.getStatus());
         pauta.setTema(dto.getTema());

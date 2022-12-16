@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,8 +56,10 @@ public class PautaServiceImpl implements PautaService {
     @Override
     public void abrirVotacaoPauta(PautaDto pautaDto) {
         Pauta pauta = new Pauta();
-        pauta.setVotacao(new Votacao());
+        pauta.setVotacao(new Votacao(0, 0, new ArrayList<>()));
         pauta.setId(pautaDto.getId());
+        pauta.setTema(pautaDto.getTema());
+        pauta.setDescricao(pautaDto.getDescricao());
         pauta.setStatus(PautaEnum.ABERTA.getStatus());
         pauta.setDataFimVotacaoPauta(dataVotacao(pautaDto.getDataFimVotacaoPauta()));
         pautaRepository.save(pauta);
