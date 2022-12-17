@@ -1,7 +1,8 @@
 package com.felzr.cooperativismo.api.pauta.service;
 
 import com.felzr.cooperativismo.api.dtos.VotoDto;
+import org.springframework.http.ResponseEntity;
 
 public interface VotarPautaService {
-    void votarPauta(VotoDto votoDto);
+    ResponseEntity<String> votarPauta(VotoDto votoDto);
 }
