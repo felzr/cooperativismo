@@ -1,9 +1,6 @@
 package com.felzr.cooperativismo.api.pauta.controller;
 
-import com.felzr.cooperativismo.api.associado.model.Associado;
-import com.felzr.cooperativismo.api.dtos.AssociadoDto;
 import com.felzr.cooperativismo.api.dtos.PautaDto;
-import com.felzr.cooperativismo.api.enums.ResponseAssociadoEnum;
 import com.felzr.cooperativismo.api.enums.ResponsePautaEnum;
 import com.felzr.cooperativismo.api.pauta.service.PautaService;
 import org.springframework.beans.factory.annotation.Autowired;

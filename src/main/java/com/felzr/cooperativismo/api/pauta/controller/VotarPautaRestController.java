@@ -1,8 +1,8 @@
 package com.felzr.cooperativismo.api.pauta.controller;
 
 import com.felzr.cooperativismo.api.dtos.VotoDto;
-import com.felzr.cooperativismo.api.enums.ResponseAssociadoEnum;
 import com.felzr.cooperativismo.api.enums.VotacaoEnum;
+import com.felzr.cooperativismo.api.exception.CooperativismoException;
 import com.felzr.cooperativismo.api.pauta.service.VotarPautaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +19,9 @@ public class VotarPautaRestController {
     VotarPautaService votarPautaService;
 
     @PostMapping(value = "/votar-pauta")
-    public ResponseEntity<String> votarPauta(@RequestBody VotoDto voto) {
-        return votarPautaService.votarPauta(voto);
+    public ResponseEntity<?> votarPauta(@RequestBody VotoDto voto) throws CooperativismoException {
+        votarPautaService.votarPauta(voto);
+        return new ResponseEntity<>(VotacaoEnum.VOTACAO_FEITA.getStatus(), HttpStatus.OK);
     }
 
 }
