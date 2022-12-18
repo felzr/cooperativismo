@@ -55,11 +55,11 @@ public class PautaServiceImpl implements PautaService {
 
     @Override
     public void abrirVotacaoPauta(PautaDto pautaDto) {
-        Pauta pauta = new Pauta();
+        Pauta pauta = pautaRepository.findAllByIdIs(pautaDto.getId());
         pauta.setVotacao(new Votacao(0, 0, new ArrayList<>()));
-        pauta.setId(pautaDto.getId());
-        pauta.setTema(pautaDto.getTema());
-        pauta.setDescricao(pautaDto.getDescricao());
+        pauta.setId(pauta.getId());
+        pauta.setTema(pauta.getTema());
+        pauta.setDescricao(pauta.getDescricao());
         pauta.setStatus(PautaEnum.ABERTA.getStatus());
         pauta.setDataFimVotacaoPauta(dataVotacao(pautaDto.getDataFimVotacaoPauta()));
         pautaRepository.save(pauta);

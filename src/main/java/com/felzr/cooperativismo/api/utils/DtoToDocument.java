@@ -52,15 +52,6 @@ public class DtoToDocument {
         return dto;
     }
 
-    public Pauta abrirParaVotacao(PautaDto dto) {
-        Pauta pauta = new Pauta();
-        pauta.setId(dto.getId());
-        pauta.setDescricao(dto.getDescricao());
-        pauta.setStatus(PautaEnum.FECHADA.getStatus());
-        pauta.setTema(dto.getTema());
-        pauta.setVotacao(converterVotacaoDtoParaDocumento(dto.getVotacao()));
-        return pauta;
-    }
 
 
 }
