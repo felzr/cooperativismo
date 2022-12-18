@@ -1,12 +1,13 @@
 package com.felzr.cooperativismo.api.integration;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-public class ValidateAssociateCpf {
+@Service
+public class ValidarCpfAssociado {
     private String url = "https://user-info.herokuapp.com/users/";
 
-    String validateCpf(String cpf) {
+    public String validateCpf(String cpf) {
         RestTemplate restTemplate = new RestTemplate();
-        return new String(restTemplate.getForObject(url.concat(cpf), String.class));
+        return restTemplate.getForObject(url.concat(cpf), String.class);
     }
 }

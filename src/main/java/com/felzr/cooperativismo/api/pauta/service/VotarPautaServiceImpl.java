@@ -3,10 +3,12 @@ package com.felzr.cooperativismo.api.pauta.service;
 import com.felzr.cooperativismo.api.associado.data.AssociadoRepository;
 import com.felzr.cooperativismo.api.associado.model.Associado;
 import com.felzr.cooperativismo.api.dtos.VotoDto;
+import com.felzr.cooperativismo.api.enums.IntegracaoEnum;
 import com.felzr.cooperativismo.api.enums.PautaEnum;
 import com.felzr.cooperativismo.api.enums.VotacaoEnum;
 import com.felzr.cooperativismo.api.enums.VotoEnum;
 import com.felzr.cooperativismo.api.exception.CooperativismoException;
+import com.felzr.cooperativismo.api.integration.ValidarCpfAssociado;
 import com.felzr.cooperativismo.api.pauta.data.PautaRepository;
 import com.felzr.cooperativismo.api.pauta.model.Pauta;
 import com.felzr.cooperativismo.api.pauta.model.Votacao;
@@ -20,11 +22,13 @@ import java.util.stream.Collectors;
 public class VotarPautaServiceImpl implements VotarPautaService {
     PautaRepository pautaRepository;
     AssociadoRepository associadoRepository;
+    ValidarCpfAssociado validarCpfAssociado;
 
     @Autowired
-    VotarPautaServiceImpl(PautaRepository pautaRepository, AssociadoRepository associadoRepository) {
+    VotarPautaServiceImpl(PautaRepository pautaRepository, AssociadoRepository associadoRepository, ValidarCpfAssociado validarCpfAssociado) {
         this.pautaRepository = pautaRepository;
         this.associadoRepository = associadoRepository;
+        this.validarCpfAssociado = validarCpfAssociado;
     }
 
     @Override
@@ -66,5 +70,11 @@ public class VotarPautaServiceImpl implements VotarPautaService {
             return votacao;
         }
         throw new CooperativismoException(VotacaoEnum.VOTO_INVALIDO.getStatus());
+    }
+
+    private void validaCpf(String cpf) {
+        if (validarCpfAssociado.validateCpf(cpf).equals(IntegracaoEnum.UNABLE_TO_VOTE.getStatus())) {
+            throw new CooperativismoException(VotacaoEnum.ASSOCIADO_NAO_VOTANTE.getStatus());
+        }
     }
 }
