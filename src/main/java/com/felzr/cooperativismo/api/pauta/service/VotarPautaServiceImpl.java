@@ -43,7 +43,7 @@ public class VotarPautaServiceImpl implements VotarPautaService {
     }
 
     private void validaVotoRepetido(Pauta pauta, String cpfAssociado) {
-        if (pauta.getVotacao().getAssociadosQueVotaram().stream().filter(associado -> associado.getCpf().equals(cpfAssociado)).collect(Collectors.toList()).size() > 0) {
+        if (pauta.getVotacao().getAssociadosQueVotaram().stream().filter(associado -> associado.getCpf().equals(cpfAssociado)).count() > 0) {
             throw new CooperativismoException(VotacaoEnum.VOTO_REPETIDO.getStatus());
         }
     }
