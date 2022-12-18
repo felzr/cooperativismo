@@ -38,12 +38,12 @@ public class AssociadoRestController {
     }
 
     @GetMapping(value = "/busca-associado-por-cpf/{cpf}")
-    Associado buscarAsssociadoPorCpf(String cpf) {
-        return associadoService.buscarAsssociadoPorCpf(cpf);
+    public ResponseEntity<Associado> buscarAsssociadoPorCpf(String cpf) {
+        return new ResponseEntity(associadoService.buscarAsssociadoPorCpf(cpf), HttpStatus.OK);
     }
 
     @GetMapping(value = "/todos")
-    List<Associado> buscarTodosOsAssociados() {
-        return associadoService.buscarTodosOsAssociados();
+    ResponseEntity<List<Associado>> buscarTodosOsAssociados() {
+        return new ResponseEntity(associadoService.buscarTodosOsAssociados(), HttpStatus.OK);
     }
 }

@@ -2,7 +2,7 @@ package com.felzr.cooperativismo.api.enums;
 
 public enum VotoEnum {
     SIM("Sim"),
-    NAO("Nao");
+    NAO("Não");
     private String voto;
 
     VotoEnum(String voto) {

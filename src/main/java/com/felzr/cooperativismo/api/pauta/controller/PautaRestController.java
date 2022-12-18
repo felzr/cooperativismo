@@ -35,13 +35,13 @@ public class PautaRestController {
     }
 
     @GetMapping(value = "/busca-pauta-por-id/{id}")
-    PautaDto buscarAsssociadoPorId(String id) {
-        return pautaService.buscarPautaPorId(id);
+    ResponseEntity<PautaDto> buscarAsssociadoPorId(String id) {
+        return new ResponseEntity(pautaService.buscarPautaPorId(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/todas")
-    List<PautaDto> buscarTodosOsAssociados() {
-        return pautaService.buscarTodasAsPautas();
+    ResponseEntity<List<PautaDto>> buscarTodosOsAssociados() {
+        return new ResponseEntity(pautaService.buscarTodasAsPautas(), HttpStatus.OK);
     }
 
     @PutMapping(value = "/abrir-votacao")
